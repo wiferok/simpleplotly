@@ -16,14 +16,15 @@ class FigureHolder(object):
     def __init__(self, figure):
         self.figure = figure
 
-    def plot(self, mode='offline', **plot_options):
+    def plot(self, mode='offline', iplot = True  **plot_options):
         if mode == 'online':
             py = plotly.plotly
         elif mode == 'offline':
             py = plotly.offline
         else:
             raise ValueError('mode must be one of (online, offline)')
-
+        if iplot == False:
+            return py.plot(self.figure, **plot_options)
         return py.iplot(self.figure, **plot_options)
 
     def plot_online(self, **plot_options):
